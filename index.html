@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+<body ng-app="chatRoom" ng-class="{'shocked':sentimentShocked ,'high':sentimentHigh,'color': sentimentColor ,'how':sentimentHow}">
+
+    <h2 class="header"  style="text-align: center; " >Emotion Chat</h2>
+ 
+    <div >
+
+        <div class= user ng-controller="userCtrl" >
+
+            <input class="style-5" ng-keyup="$event.keyCode == 13 && createUser(username)" ng-model="username" type="text" />
+            <button class="newButton" ng-click="createUser(username)">Submit User</button>
+        </div>
+        <div ng-show="sentimentHeart" class="heart pulse2">♥</div>
+        <div class="chat">
+
+            <div ng-controller="chatCtrl" class="messages">
+                <div class="messages-content"  >
+                    <p class="message message-personal new" ng-repeat="message in messages" style="font-style: italic;">
+                        <strong>{{message.userName}}</strong>:{{message.message}}
+                    </p>
+                </div>
+
+                <div class="message-box" style="position: fixed;">
+
+                    <input class="message-input" ng-keyup="$event.keyCode == 13 && sendMessage()" ng-model="newMessage" type="text" />
+                    <button ng-click="sendMessage(newMessage)" class="message-submit">Send Message</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script src="/angular/angular.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="js/controller/chat.controller.js" defer></script>
+    <script src="js/controller/user.controller.js" defer></script>
+</body>
+
+</html>
